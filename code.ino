@@ -6,7 +6,7 @@
 #define DHTPIN 14
 #define SenMolhado 33
 #define DHTTYPE DHT11 
-#define VibraPort 32
+#define VibraPort 19
 
 DHT dht(DHTPIN, DHTTYPE);
 
@@ -60,11 +60,11 @@ void setup() {
 }
 
 void loop() {
-  delay(10);
+  delay(100);
   runs+=1;
   shaking += digitalRead(VibraPort);
   period = millis() - lastTime;
-  if (period > timerDelay) {
+  if (runs == 10) {
     if(WiFi.status()== WL_CONNECTED){
       hum = dht.readHumidity();
       temp = dht.readTemperature();
